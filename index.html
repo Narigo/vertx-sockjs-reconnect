@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<script type="text/javascript" src="sockjs.js"></script>
+<script type="text/javascript" src="vertxbus.js"></script>
+</head>
+<body>
+
+	<h1>Some small test..</h1>
+	<div id="result"></div>
+
+	<script>
+    var eb, resultDiv;
+
+    function writeResult(text) {
+      var myDiv = document.createElement('div');
+      myDiv.innerHTML = text;
+      resultDiv.appendChild(myDiv);
+    }
+
+    resultDiv = document.getElementById('result');
+
+    eb = new vertx.EventBus('http://localhost:8080/eventbus');
+
+    eb.onopen = function() {
+      writeResult('eventbus opened.');
+    };
+
+    eb.onclose = function() {
+      writeResult('eventbus closed.');
+    };
+  </script>
+</body>
+</html>
